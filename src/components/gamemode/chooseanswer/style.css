@@ -1,0 +1,96 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+.main {
+  background-color: #e6e6fa;
+  height: 100vh;
+  padding: 32px;
+}
+.close {
+  float: right;
+  font-size: larger;
+  cursor: pointer;
+}
+.close:hover {
+  color: rgb(188, 24, 24);
+}
+
+/* style cho class main-title */
+.main-title {
+  margin-top: 20px;
+  font-size: 28px;
+  text-decoration: underline;
+  padding-bottom: 12px;
+}
+
+/* style cho class header-title */
+.header-title {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  color: rgb(61, 129, 36);
+  font-weight: 600;
+}
+
+/* style cho các phần tử bên trong header-title */
+.header-title div {
+  font-size: 18px;
+}
+
+/* style cho class question */
+.question {
+  margin-top: 20px;
+  padding: 7px;
+  padding-bottom: 45px;
+}
+
+.question p {
+  font-size: 45px;
+  font-weight: bold;
+}
+
+/* style cho class answer */
+.answer {
+  display: flex;
+  margin-top: 20px;
+  width: 80%;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  padding: 18px;
+  justify-content: center;
+  font-size: 24px;
+}
+
+/* style cho các phần tử bên trong answer */
+.answer .answer-1 {
+  width: 45%;
+  padding: 18px;
+  background-color: #c1b6b6;
+  text-align: center;
+  line-height: 50px;
+  margin: 5px;
+  cursor: pointer;
+  color: rgb(29, 25, 64);
+  transition: 300ms;
+}
+.answer-1:hover {
+  background-color: rgb(19, 100, 158);
+  color: rgb(233, 138, 70);
+}
+.a1 {
+  border-top-left-radius: 15px;
+}
+.b2 {
+  border-top-right-radius: 15px;
+}
+.c3 {
+  border-bottom-left-radius: 15px;
+}
+.d4 {
+  border-bottom-right-radius: 15px;
+}

@@ -1,0 +1,38 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+.main {
+  background-color: #e6e6fa;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.close {
+  float: right;
+  font-size: larger;
+  cursor: pointer;
+}
+.close:hover {
+  color: rgb(188, 24, 24);
+}
+
+.main-title {
+  margin-top: 20px;
+  font-size: 24px;
+  text-decoration: underline;
+}
+
+/* style cho class question */
+.question {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.question p {
+  font-size: 32px;
+}
