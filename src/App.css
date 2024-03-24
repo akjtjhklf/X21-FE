@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+body{
+  font-family: "Patrick Hand", cursive !important;
+  font-weight: 400 !important;
+  font-style: normal !important; 
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

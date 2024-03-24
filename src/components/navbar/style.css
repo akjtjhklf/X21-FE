@@ -1,0 +1,24 @@
+.nav-item{
+    list-style: none !important;
+    margin-left: 30px;
+    background-color: antiquewhite;
+    padding: 10px 20px;
+    border: 1px solid black;
+    border-radius: 8px;
+    text-align: center;
+}
+.list-nav-item{
+    display: flex;
+    flex-direction: row;
+    margin: 0px;
+}
+.nav-bar{
+    display: flex !important;
+    background-color: beige !important;
+    justify-content: space-between;
+    align-items: center ;
+    padding: 10px;
+}
+.nav-bar img{
+    margin-left: 30px;
+}
