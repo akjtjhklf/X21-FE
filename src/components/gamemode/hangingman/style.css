@@ -5,34 +5,199 @@
   font-family: sans-serif;
 }
 
-.main {
-  background-color: #e6e6fa;
-  height: 100vh;
+.hanging-man {
+  width: 80%;
+  margin: 0 auto;
+  background-color: #fef7f7;
+  border: solid 3px #ccc;
+  border-radius: 15px;
+}
+
+.hanging-man-gameover {
+  margin: 0 auto;
+  width: 60%;
+  height: 100%;
+  background-color: #ebdada;
+  color: black;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-style: italic;
+  padding: 32px;
+}
+
+.gameover {
+  width: 100%;
+  height: 80vh;
+  background-color: #ebdada;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
-.close {
-  float: right;
-  font-size: larger;
+
+.hanging-man-retry-button {
+  padding: 15px;
+  background-color: #5e5757;
+  border-radius: 25px;
+  color: #fcfcfc;
   cursor: pointer;
+  transition: 500ms;
+  box-shadow: 3px 3px 5px #828080;
 }
-.close:hover {
-  color: rgb(188, 24, 24);
-}
-
-.main-title {
-  margin-top: 20px;
-  font-size: 24px;
-  text-decoration: underline;
+.hanging-man-retry-button:hover {
+  background-color: rgb(37, 37, 37);
+  color: rgb(205, 230, 230);
 }
 
-/* style cho class question */
-.question {
-  margin-top: 20px;
-  text-align: center;
+.hanging-man-question {
+  width: 100%;
+  height: 300px;
+  border: 3px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 30px;
 }
 
-.question p {
-  font-size: 32px;
+.hanging-man-answer {
+  width: 100%;
+  padding: 24px;
+  letter-spacing: 15px;
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.hanging-man-question-content {
+  width: 90%;
+  height: 150px;
+  border: 3px solid #ccc;
+  background-color: #fcfcfc;
+  font-size: 25px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hanging-man-keyboard-key {
+  width: 40px;
+  height: 40px;
+  font-size: 22px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #ffffff;
+  margin: 3px;
+  cursor: pointer;
+  transition: 500ms;
+  box-shadow: 0px 2px 5px #ccc;
+}
+.hanging-man-keyboard-key:hover {
+  background-color: rgb(44, 38, 38);
+  color: #ccc;
+}
+
+.hanging-man-keyboard {
+  margin: 0.5 auto;
+  width: 52%;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.hanging-man-quote {
+  width: 48%;
+  background-color: rgb(252, 209, 154);
+  border: 2px dashed #393939;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-style: italic;
+  padding: 25px;
+  opacity: 70%;
+}
+img {
+  width: 80%;
+  height: 100%;
+}
+/* .main {
+  width: 150vh;
+  margin: 0 auto;
+}
+
+.main-header {
+  width: 95%;
+  background-color: aqua;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 8px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.main-header .main-header-user {
+  width: 30%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.main-header .logo,
+.main-header .home,
+.main-header .datetime {
+  border: 1px solid rgb(227, 227, 182);
+  background-color: white;
+  color: rgb(58, 53, 53);
+  border-radius: 25px;
+  padding: 18px;
+}
+
+.gameplay {
+  width: 95%;
+  padding: 15px;
+  background-color: aqua;
+  border-radius: 10px;
+  margin: 0 auto;
+  display: flex;
+}
+.gameplay .gameplay-screen {
+  width: 60%;
+  padding-right: 35px;
+  border: 1px solid rgb(255, 255, 255);
+  background-color: burlywood;
+  border-radius: 25px;
+  padding: 12px;
+}
+.gameplay .gameplay-screen .qc {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.gameplay .gameplay-screen .qc .quest {
+  background-color: rgb(255, 255, 255);
+  width: 80%;
+  padding: 24px;
+  border-radius: 24px;
+}
+.gameplay .gameplay-screen .qc .clock {
+  background-color: white;
+  padding: 30px;
+  border-radius: 100%;
+  width: 17%;
+}
+
+.gameplay .gameplay-screen .answer {
+  word-spacing: 24px;
+}
+
+.gameplay .hanged-screen {
+  margin-left: 24px;
+  margin: 0 auto;
+} */

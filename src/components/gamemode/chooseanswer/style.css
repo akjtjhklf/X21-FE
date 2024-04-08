@@ -4,93 +4,53 @@
   box-sizing: border-box;
   font-family: sans-serif;
 }
-
-.main {
-  background-color: #e6e6fa;
-  height: 100vh;
-  padding: 32px;
-}
-.close {
-  float: right;
-  font-size: larger;
-  cursor: pointer;
-}
-.close:hover {
-  color: rgb(188, 24, 24);
-}
-
-/* style cho class main-title */
-.main-title {
-  margin-top: 20px;
-  font-size: 28px;
-  text-decoration: underline;
-  padding-bottom: 12px;
-}
-
-/* style cho class header-title */
-.header-title {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 12px;
-  color: rgb(61, 129, 36);
-  font-weight: 600;
-}
-
-/* style cho các phần tử bên trong header-title */
-.header-title div {
-  font-size: 18px;
-}
-
-/* style cho class question */
-.question {
-  margin-top: 20px;
-  padding: 7px;
-  padding-bottom: 45px;
-}
-
-.question p {
-  font-size: 45px;
-  font-weight: bold;
-}
-
-/* style cho class answer */
-.answer {
-  display: flex;
-  margin-top: 20px;
+.choose-answer {
   width: 80%;
   margin: 0 auto;
-  flex-wrap: wrap;
-  padding: 18px;
-  justify-content: center;
-  font-size: 24px;
+  background-color: #fef7f7;
+  border: solid 3px #ccc;
+  border-radius: 15px;
+}
+.choose-answer-count {
+  width: 100%;
+  height: 100%;
+  color: black;
+  padding: 12px;
+}
+.choose-answer-count-question {
+  border: solid 3px #ccc;
+  border-radius: 15px;
+  padding: 25px;
 }
 
-/* style cho các phần tử bên trong answer */
-.answer .answer-1 {
+.choose-answer-question span {
+  width: 98%;
+  margin: 0 auto;
+  border: solid 3px #ccc;
+  border-radius: 15px;
+  padding: 24px;
+  font-size: 32px;
+}
+.choose-answer-answer {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 12px;
+  padding-bottom: 50px;
+  padding-top: 50px;
+}
+.choose-answer-answer-button {
+  padding: 12px;
+  border-radius: 15px;
+  background-color: rgb(255, 255, 255);
   width: 45%;
-  padding: 18px;
-  background-color: #c1b6b6;
-  text-align: center;
-  line-height: 50px;
-  margin: 5px;
-  cursor: pointer;
-  color: rgb(29, 25, 64);
-  transition: 300ms;
+  box-shadow: 3px 3px 3px gray;
+  transition: 500ms;
+  font-size: 25px;
 }
-.answer-1:hover {
-  background-color: rgb(19, 100, 158);
-  color: rgb(233, 138, 70);
-}
-.a1 {
-  border-top-left-radius: 15px;
-}
-.b2 {
-  border-top-right-radius: 15px;
-}
-.c3 {
-  border-bottom-left-radius: 15px;
-}
-.d4 {
-  border-bottom-right-radius: 15px;
+.choose-answer-answer-button:hover {
+  background-color: rgb(155, 198, 236);
 }

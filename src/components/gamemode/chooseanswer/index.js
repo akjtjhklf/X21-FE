@@ -1,24 +1,92 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
 
-const ChooseAnswer = () => {
+import { Col, Row, Flex } from "antd";
+import Clock from "../clock";
+
+const gameDuration = 20;
+
+const ChooseAnswer = ({
+  correctAnswer,
+  question,
+  answers,
+  currentQuestionIndex,
+  totalQuestion,
+  onPass,
+  onFail,
+  onOverTime,
+}) => {
+  const [time, setTime] = useState(gameDuration);
+
+  useEffect(() => {
+    setTime(gameDuration);
+  }, [question, answers]);
+
+  const checkAnswer = (userAnswer) => {
+    if (userAnswer !== correctAnswer) {
+      onFail();
+    } else {
+      onPass();
+    }
+  };
+
   return (
-    <div className="main">
-      <div className="close">x</div>
-      <div className="main-title">Chủ đề : Lịch sử</div>
-      <div className="header-title">
-        <div>Câu hỏi : 1/20</div>
-        <div>Thời gian còn lại : 10s</div>
-      </div>
-      <div className="question">
-        <p>Loài người hiện có mấy chủng tộc chính ?</p>
-      </div>
-      <div className="answer">
-        <div className="answer-1 a1">A : 3</div>
-        <div className="answer-1 b2">B : 4</div>
-        <div className="answer-1 c3">C : 2</div>
-        <div className="answer-1 d4">D : 1</div>
-      </div>
+    <div className="choose-answer">
+      <Row>
+        <Col span={24}>
+          <div className="choose-answer-count">
+            <Flex
+              gap={20}
+              align="center"
+              justify="space-between"
+              style={{ marginBottom: "10px" }}
+            >
+              <div className="choose-answer-count-question">
+                <span>
+                  Câu {currentQuestionIndex + 1}/{totalQuestion}
+                </span>
+              </div>
+              <Clock
+                time={time}
+                onCountDown={setTime}
+                onStop={() => {
+                  console.log("Time over!");
+                  onFail && onFail();
+                }}
+              />
+            </Flex>
+          </div>
+        </Col>
+        <Col span={24}>
+          <div className="choose-answer-question">
+            <Flex
+              gap={20}
+              align="center"
+              justify="space-between"
+              style={{ marginBottom: "10px" }}
+            >
+              <span>{question}</span>
+            </Flex>
+          </div>
+        </Col>
+        <Col span={24}>
+          <div className="choose-answer-answer">
+            {answers.map((answer) => (
+              <button
+                key={answer}
+                onClick={() => {
+                  checkAnswer(answer);
+                  console.log(`Đáp án bạn chọn: ${answer}`);
+                }}
+                type="button"
+                className="choose-answer-answer-button"
+              >
+                {answer}
+              </button>
+            ))}
+          </div>
+        </Col>
+      </Row>
     </div>
   );
 };
