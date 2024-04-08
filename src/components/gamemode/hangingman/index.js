@@ -1,105 +1,191 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Row, Col, Flex } from "antd";
+
+import Clock from "../clock";
+
 import "./style.css";
+import a0 from "./0.jpg";
+import a1 from "./1.jpg";
+import a2 from "./2.jpg";
+import a3 from "./3.jpg";
+import a4 from "./4.jpg";
+import a5 from "./5.jpg";
+import a6 from "./6.jpg";
 
-const HangingMan = () => {
-  // Chọn từ bí mật ngẫu nhiên
-  const words = ["chiến thắng", "thủ đô", "việt nam", "lịch sử", "tình bạn"];
-  const randomIndex = Math.floor(Math.random() * words.length);
-  const [word, setWord] = useState(words[randomIndex]);
+const failImages = [a0, a1, a2, a3, a4, a5, a6];
+const fakeKeys = [
+  "A",
+  "Á",
+  "Â",
+  "E",
+  "Ê",
+  "Ế",
+  "U",
+  "Ư",
+  "À",
+  "Ô",
+  "I",
+  "Ổ",
+  "Ộ",
+  "K",
+  "L",
+  "B",
+  "Đ",
+  "C",
+  "M",
+  "X",
+  "V",
+  "R",
+  "S",
+  "G",
+  "L",
+];
 
-  const [guesses, setGuesses] = useState([]); // Array to store guessed letters
-  const [remainingGuesses, setRemainingGuesses] = useState(6); // Number of remaining guesses
-  const [gameOver, setGameOver] = useState(false); // Game state (over or not)
-  const [correctLetters, setCorrectLetters] = useState([]); // Array to store correctly guessed letters
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
 
-  const handleGuess = (letter) => {
-    // Validate input (optional)
-    if (letter.length !== 1 || !letter.match(/^[a-zA-Z]+$/)) {
-      return; // Invalid input
-    }
+let toUpper = function (x) {
+  return x.toUpperCase();
+};
 
-    letter = letter.toLowerCase();
+const gameDuration = 60;
 
-    if (guesses.includes(letter) || gameOver) {
-      return;
-    }
+const HangingMan = ({
+  question,
+  correctAnswer,
+  // currentQuestionIndex,
+  // totalQuestion,
+  onPass,
+  onFail,
+  onOverTime,
+}) => {
+  const [failCount, setFailCount] = useState(0);
+  const [currentAnswer, setCurrentAnswer] = useState("");
+  const [keyboard, setKeyboard] = useState([]);
+  const [time, setTime] = useState(gameDuration);
 
-    setGuesses([...guesses, letter]);
-
-    const isCorrect =
-      word.includes(letter) || word.includes(letter.toUpperCase());
-    if (!isCorrect) {
-      setRemainingGuesses(remainingGuesses - 1);
-
-      if (remainingGuesses === 0) {
-        setGameOver(true);
+  const initGame = (correctAnswer) => {
+    let answerMask = "";
+    const newKeyboard = [];
+    const tmp = correctAnswer.split("");
+    for (let character of tmp) {
+      if (character !== " ") {
+        answerMask += "*";
+        if (!newKeyboard.includes(character)) {
+          newKeyboard.push(character);
+        }
+      } else {
+        answerMask += " ";
       }
-    } else {
-      setCorrectLetters([...correctLetters, letter]);
     }
+    for (let fakeKey of fakeKeys) {
+      if (!newKeyboard.includes(fakeKeys)) {
+        newKeyboard.push(fakeKey);
+      }
+    }
+
+    shuffleArray(newKeyboard);
+    setKeyboard(newKeyboard);
+    setCurrentAnswer(answerMask);
+    setTime(gameDuration);
   };
 
-  const handleReset = () => {
-    const randomIndex = Math.floor(Math.random() * words.length);
-    const newWord = words[randomIndex];
-    setWord(newWord);
+  useEffect(() => {
+    initGame(correctAnswer);
+  }, [correctAnswer]);
 
-    setGuesses([]);
-    setRemainingGuesses(6);
-    setGameOver(false);
-    setCorrectLetters([]);
-  };
+  const guess = (letter) => {
+    if (failCount < 6) {
+      let isMatch = false;
+      let newCurrentAnswer = currentAnswer.split("");
+      for (let i = 0; i < correctAnswer.length; i++) {
+        if (correctAnswer[i] === letter) {
+          isMatch = true;
+          newCurrentAnswer[i] = letter;
+        }
+      }
+      if (isMatch) {
+        setCurrentAnswer(newCurrentAnswer.join(""));
+        console.log(correctAnswer.toString(), newCurrentAnswer.toString());
+        if (correctAnswer === newCurrentAnswer.join("")) {
+          onPass();
+        }
+      } else {
+        const newFailCount = failCount + 1;
+        setFailCount(newFailCount);
 
-  const getLetterDisplay = () => {
-    return word.split("").map((letter) => (
-      <span
-        key={letter}
-        className={`answer-letter ${
-          correctLetters.includes(letter.toLowerCase()) ? "correct" : ""
-        }`}
-      >
-        {correctLetters.includes(letter.toLowerCase()) ? letter : "_"}
-      </span>
-    ));
+        if (newFailCount >= 6) {
+          setTimeout(() => {
+            onFail && onFail();
+          }, 1500);
+        }
+      }
+    }
   };
 
   return (
-    <div className="main">
-      <div className="close">x</div>
-      <div className="main-title">Chủ đề : Ngẫu nhiên</div>
-      <div className="question">
-        <p>
-          {remainingGuesses > 0
-            ? `Còn lại ${remainingGuesses} lượt đoán.`
-            : "Đã hết lượt đoán!"}
-        </p>
-        <p>{gameOver ? `Từ bí mật là: ${word}` : getLetterDisplay()}</p>
-        {gameOver ? <button onClick={handleReset}>Chơi lại</button> : null}
-      </div>
-      <div className="answer">
-        <input type="text" maxLength={word.length} placeholder="Nhập đáp án" />
-      </div>
-      <div className="keyboard">
-        {["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"].map((letter) => (
-          <button key={letter} onClick={() => handleGuess(letter)}>
-            {letter.toUpperCase()}
-          </button>
-        ))}
-        <br />
-        {["A", "S", "D", "F", "G", "H", "J", "K", "L"].map((letter) => (
-          <button key={letter} onClick={() => handleGuess(letter)}>
-            {letter.toUpperCase()}
-          </button>
-        ))}
-        <br />
-        {["Z", "X", "C", "V", "B", "N", "M"].map((letter) => (
-          <button key={letter} onClick={() => handleGuess(letter)}>
-            {letter.toUpperCase()}
-          </button>
-        ))}
-      </div>
+    <div className="hanging-man">
+      <Row>
+        <Col span={18}>
+          <div className="hanging-man-question">
+            <Flex gap={20} align="center" style={{ marginBottom: "10px" }}>
+              <div className="hanging-man-question-content">
+                <span>{question}</span>
+              </div>
+              <Clock
+                time={time}
+                onCountDown={setTime}
+                onStop={() => {
+                  console.log("Time over!");
+                  setFailCount(6);
+                  setTimeout(() => {
+                    onFail && onFail();
+                  }, 1500);
+                }}
+              />
+            </Flex>
+            <div className="hanging-man-answer">{currentAnswer}</div>
+          </div>
+        </Col>
+        <Col span={4}>
+          <img src={failImages[failCount]} alt="fail" />
+        </Col>
+        <Col
+          span={22}
+          style={{
+            display: "Flex",
+            marginTop: "20px",
+            paddingBottom: "20px",
+          }}
+        >
+          <div className="hanging-man-keyboard">
+            {keyboard.map((item) => {
+              return (
+                <button
+                  type="button"
+                  onClick={() => guess(item)}
+                  className="hanging-man-keyboard-key"
+                  disabled={failCount == 6}
+                >
+                  {item}
+                </button>
+              );
+            })}
+          </div>
+          <div className="hanging-man-quote">
+            "Nếu mà khó quá, thì mình bỏ qua. Dù sao câu này học sinh lớp 5 cũng
+            làm được."
+          </div>
+        </Col>
+      </Row>
     </div>
   );
 };
-
 export default HangingMan;
+
+//Có 1 lỗi :
+// Khi game over, chưa reset được phần trả lời về lại dạng *
