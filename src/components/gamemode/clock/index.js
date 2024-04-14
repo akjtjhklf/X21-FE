@@ -16,13 +16,16 @@ const Clock = ({ time, onCountDown, onStop }) => {
   // }, [time]);
 
   useEffect(() => {
+    let timer = null;
     if (time > 0) {
-      setTimeout(() => {
+      timer = setTimeout(() => {
         onCountDown && onCountDown(time - 1);
       }, 1000);
     } else {
       onStop && onStop();
     }
+
+    return () => clearTimeout(timer);
   }, [time]);
 
   const minutes = Math.floor(time / 60);

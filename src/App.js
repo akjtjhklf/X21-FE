@@ -1,16 +1,21 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
 import TakeChallenge from "./components/takechallenge";
-
-const testList = ["Không", "Làm", "Mà", "Đòi", "Có", "Ăn"];
-
+import TakeSubjects from "./components/takesubject";
+import SubjectListPage from "./pages/subjectlistpage";
+import TakeChallengePage from "./pages/takechallengepage";
 
 function App() {
   return (
     <div className="App">
-
-      <TakeChallenge />
-
+      <Routes>
+        <Route path="/" element={<h1>trang chu</h1>} />
+        <Route path="/login" element={<h1>dang nhap</h1>} />
+        <Route path="/register" element={<h1>dang ky</h1>} />
+        <Route path="/subjects" element={<SubjectListPage />} />
+        <Route path="/take-challenge" element={<TakeChallengePage />} />
+      </Routes>
     </div>
   );
 }
