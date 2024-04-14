@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import GameOver from "../modal/gameover";
 import GameCompleted from "../modal/gamecompleted";
 
@@ -6,68 +7,35 @@ import ChooseAnswer from "../gamemode/chooseanswer";
 import Reorganize from "../gamemode/reorganize";
 import HangingMan from "../gamemode/hangingman";
 
-const TakeChallenge = () => {
-  const [questions, setQuestions] = useState([
-    {
-      _id: {
-        $oid: "65f2a144e3106bd56c0f11d8",
-      },
-      question:
-        "Tài nguyên đất của Việt Nam rất phong phú, trong đó có nhiều nhất là :",
-      subject: {
-        _id: {
-          $oid: "65f150adc4a897b75dd547c4",
-        },
-        name: "Georaphy",
-      },
-      challengeType: "qnas",
-      answers: [
-        "Đất đồng cỏ",
-        "Đất hoang mạc",
-        "Đất phù sa",
-        "Đất phù sa và đất feralit",
-      ],
-      rightAnswer: "Đất phù sa và đất feralit",
-    },
-    {
-      _id: {
-        $oid: "65fc13975313969603a298ec",
-      },
-      question: "Sắp xếp các chữ sao thành từ có nghĩa",
-      subject: {
-        _id: {
-          $oid: "65f15091c4a897b75dd547c3",
-        },
-        name: "History",
-      },
-      challengeType: "arrange",
-      rightAnswer: ["Võ", "Thị", "Sáu"],
-    },
-    {
-      _id: {
-        $oid: "65fc0d9e5313969603a298d4",
-      },
-      question: "Dãy núi nào chạy dọc miền Trung ?",
-      subject: {
-        _id: {
-          $oid: "65f150adc4a897b75dd547c4",
-        },
-        name: "Georaphy",
-      },
-      challengeType: "hangman",
-      rightAnswer: "TRƯỜNG SƠN",
-    },
-  ]);
+const TakeChallenge = ({ subjectId, challengeType }) => {
+  const [questions, setQuestions] = useState([]);
   const [passQuestionCount, setPassQuestionCount] = useState(0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [gameCompleted, setGameCompleted] = useState(false);
+  useEffect(() => {
+    const fetchQuestion = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/qnas/", {
+          params: { subjectId: subjectId, challengeType: challengeType },
+        });
+        if (response.status == 200) {
+          setQuestions(response.data.questions);
+          console.log(response);
+        } else {
+          console.log("Error fetching");
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchQuestion();
+  }, []);
 
-  const fetchData = () => {};
   const totalQuestion = questions.length;
   const currentQuestion = questions[currentQuestionIndex];
-  console.log(currentQuestion);
-  console.log(currentQuestionIndex);
+
+  // console.log(currentQuestionIndex);
   const onPass = () => {
     console.log("Bạn đã trả lời đúng câu hỏi");
     setPassQuestionCount(passQuestionCount + 1);
@@ -90,20 +58,20 @@ const TakeChallenge = () => {
 
   return (
     <div>
-      {/* {gameOver && <GameOver gameOver={gameOver} />}
-      {gameCompleted && <GameCompleted gameCompleted={gameCompleted} />} */}
-      {currentQuestion.challengeType === "qnas" && (
+      {gameOver && <GameOver gameOver={gameOver} />}
+      {gameCompleted && <GameCompleted gameCompleted={gameCompleted} />}
+      {currentQuestion?.challengeType === "qnas" && (
         <ChooseAnswer
           question={currentQuestion.question}
           answers={currentQuestion.answers}
+          correctAnswer={currentQuestion.rightAnswer}
           totalQuestion={totalQuestion}
           currentQuestionIndex={currentQuestionIndex}
-          correctAnswer={currentQuestion.rightAnswer}
           onPass={onPass}
           onFail={onFail}
         />
       )}
-      {currentQuestion.challengeType === "hangman" && (
+      {/* {challengeType === "hangman" && (
         <HangingMan
           question={currentQuestion.question}
           //   totalQuestion={totalQuestion}
@@ -113,7 +81,7 @@ const TakeChallenge = () => {
           onFail={onFail}
         />
       )}
-      {currentQuestion.challengeType === "arrange" && (
+      {challengeType === "arrange" && (
         <Reorganize
           question={currentQuestion.question}
           totalQuestion={totalQuestion}
@@ -122,7 +90,7 @@ const TakeChallenge = () => {
           onPass={onPass}
           onFail={onFail}
         />
-      )}
+      )} */}
     </div>
   );
 };

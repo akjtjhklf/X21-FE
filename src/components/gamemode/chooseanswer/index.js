@@ -71,7 +71,7 @@ const ChooseAnswer = ({
         </Col>
         <Col span={24}>
           <div className="choose-answer-answer">
-            {answers.map((answer) => (
+            {answers?.map((answer) => (
               <button
                 key={answer}
                 onClick={() => {
