@@ -5,6 +5,7 @@ import TakeChallenge from "./components/takechallenge";
 import TakeSubjects from "./components/takesubject";
 import SubjectListPage from "./pages/subjectlistpage";
 import TakeChallengePage from "./pages/takechallengepage";
+import GameResult from "./components/gameresult";
 
 function App() {
   return (

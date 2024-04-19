@@ -11,7 +11,7 @@ function shuffleArray(array) {
   return array;
 }
 
-const gameDuration = 60;
+const gameDuration = 600;
 
 const ReorganizeGame = ({
   question,
@@ -106,7 +106,7 @@ const ReorganizeGame = ({
           </div>
         </Col>
         <Col span={24}>
-          <div className="reorganize-game-puzzle">
+          <div className="reorganize-game-puzzle1">
             {answer.list1.map((item) => (
               <span key={item} onClick={() => chooseAnswer(item)}>
                 {item}
@@ -115,14 +115,19 @@ const ReorganizeGame = ({
           </div>
         </Col>
         <Col span={24}>
-          <div className="reorganize-game-puzzle">
+          <div className="reorganize-game-puzzle2">
             {answer.list2.map((item) => (
               <span key={item} onClick={() => reverseAnswer(item)}>
                 {item}
               </span>
             ))}
           </div>
-          <button onClick={() => checkAnswer()}>Submit</button>
+          <button
+            className="reorganize-button-submit"
+            onClick={() => checkAnswer()}
+          >
+            Submit
+          </button>
         </Col>
       </Row>
     </div>

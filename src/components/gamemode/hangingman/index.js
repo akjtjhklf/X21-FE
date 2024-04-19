@@ -48,10 +48,6 @@ function shuffleArray(array) {
   }
 }
 
-let toUpper = function (x) {
-  return x.toUpperCase();
-};
-
 const gameDuration = 60;
 
 const HangingMan = ({
@@ -74,7 +70,7 @@ const HangingMan = ({
     const tmp = correctAnswer.split("");
     for (let character of tmp) {
       if (character !== " ") {
-        answerMask += "*";
+        answerMask += "_";
         if (!newKeyboard.includes(character)) {
           newKeyboard.push(character);
         }

@@ -10,6 +10,7 @@
   background-color: #fef7f7;
   border: solid 3px #ccc;
   border-radius: 15px;
+  margin-top: 40px;
 }
 
 .reorganize-game-count {
@@ -21,7 +22,10 @@
 .reorganize-game-count-question {
   border: solid 3px #ccc;
   border-radius: 15px;
-  padding: 25px;
+  padding: 18px;
+  background-color: #ffffff;
+  font-size: 14px;
+  font-weight: bolder;
 }
 
 .reorganize-game-question {
@@ -35,16 +39,38 @@
   border-radius: 15px;
   padding: 24px;
   font-size: 32px;
+  background-color: white;
 }
-.reorganize-game-puzzle {
-  width: 100%;
+.reorganize-game-puzzle1 {
+  width: 60%;
+  height: 104.6px;
   gap: 20px;
   display: flex;
   justify-content: center;
-  padding-bottom: 25px;
+  align-items: center;
+  margin: 0 auto;
+  padding: 25px;
+  border: 3px solid #fefefe;
+  border-radius: 15px;
+  background-color: rgb(226, 219, 211);
 }
 
-.reorganize-game-puzzle span {
+.reorganize-game-puzzle2 {
+  width: 60%;
+  height: 104.6px;
+  gap: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 25px;
+  border: 1px solid #fefefe;
+  border-radius: 15px;
+  background-color: rgb(226, 219, 211);
+  margin-bottom: 20px;
+}
+
+.reorganize-game-puzzle1 span {
   border: 1px solid #ccc;
   background-color: white;
   font-size: 20px;
@@ -52,4 +78,23 @@
   border-radius: 15px;
   padding: 24px;
   cursor: pointer;
+}
+
+.reorganize-game-puzzle2 span {
+  border: 1px solid #ccc;
+  background-color: white;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 15px;
+  padding: 24px;
+  cursor: pointer;
+}
+
+.reorganize-button-submit {
+  padding: 8px;
+  margin-bottom: 14px;
+  border-radius: 40px;
+  box-shadow: 2px 3px 5px #ccc;
+  background-color: rgb(138, 82, 82);
+  color: #ededed;
 }
