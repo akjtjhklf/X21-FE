@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import GameOver from "../modal/gameover";
-import GameCompleted from "../modal/gamecompleted";
+
+import GameResult from "../gameresult";
 
 import ChooseAnswer from "../gamemode/chooseanswer";
 import Reorganize from "../gamemode/reorganize";
@@ -10,9 +10,11 @@ import HangingMan from "../gamemode/hangingman";
 const TakeChallenge = ({ subjectId, challengeType }) => {
   const [questions, setQuestions] = useState([]);
   const [passQuestionCount, setPassQuestionCount] = useState(0);
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [gameOver, setGameOver] = useState(false);
-  const [gameCompleted, setGameCompleted] = useState(false);
+  const [isGameOver, setIsGameOver] = useState(false);
+  const [pointCount, setPointCount] = useState(0);
+  const [isAddingPoint, setIsAddingPoint] = useState(false);
   useEffect(() => {
     const fetchQuestion = async () => {
       try {
@@ -38,12 +40,13 @@ const TakeChallenge = ({ subjectId, challengeType }) => {
   // console.log(currentQuestionIndex);
   const onPass = () => {
     console.log("Bạn đã trả lời đúng câu hỏi");
+    setIsAddingPoint(true);
     setPassQuestionCount(passQuestionCount + 1);
     if (currentQuestionIndex < totalQuestion - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
       console.log("Bạn đã hoàn thành game");
-      setGameCompleted(true);
+      setIsGameOver(true);
     }
   };
   const onFail = () => {
@@ -52,14 +55,29 @@ const TakeChallenge = ({ subjectId, challengeType }) => {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
       console.log("Bạn đã hoàn thành game");
-      setGameOver(true);
+      setIsGameOver(true);
     }
   };
+  const handlePoint = () => {
+    const point = 100;
+    if (isAddingPoint) {
+      setPointCount(pointCount + point);
+    }
+  };
+  useEffect(() => {
+    handlePoint();
+  }, [passQuestionCount]);
 
   return (
     <div>
-      {gameOver && <GameOver gameOver={gameOver} />}
-      {gameCompleted && <GameCompleted gameCompleted={gameCompleted} />}
+      {isGameOver && (
+        <GameResult
+          setIsGameOver={setIsGameOver}
+          passQuestionCount={passQuestionCount}
+          totalQuestion={totalQuestion}
+          pointCount={pointCount}
+        />
+      )}
       {currentQuestion?.challengeType === "qnas" && (
         <ChooseAnswer
           question={currentQuestion.question}
@@ -71,17 +89,17 @@ const TakeChallenge = ({ subjectId, challengeType }) => {
           onFail={onFail}
         />
       )}
-      {/* {challengeType === "hangman" && (
+      {currentQuestion?.challengeType === "hangman" && (
         <HangingMan
           question={currentQuestion.question}
-          //   totalQuestion={totalQuestion}
+          // totalQuestion={totalQuestion}
           currentQuestionIndex={currentQuestionIndex}
           correctAnswer={currentQuestion.rightAnswer}
           onPass={onPass}
           onFail={onFail}
         />
       )}
-      {challengeType === "arrange" && (
+      {currentQuestion?.challengeType === "arrange" && (
         <Reorganize
           question={currentQuestion.question}
           totalQuestion={totalQuestion}
@@ -90,7 +108,7 @@ const TakeChallenge = ({ subjectId, challengeType }) => {
           onPass={onPass}
           onFail={onFail}
         />
-      )} */}
+      )}
     </div>
   );
 };

@@ -9,9 +9,9 @@ export default function SubjectListPage() {
   const [subjects, setSubjects] = useState([]);
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [challengeTypes, setChallengeType] = useState([
-    { value: "hangman", label: "Hangman" },
-    { value: "qnas", label: "Chon dap an dung" },
-    { value: "arrange", label: "Sap xep" },
+    { value: "hangman", label: "Hanging man" },
+    { value: "qnas", label: "Chọn đáp án đúng" },
+    { value: "arrange", label: "Sắp xếp câu" },
   ]);
   const navigate = useNavigate();
 
@@ -33,8 +33,9 @@ export default function SubjectListPage() {
 
   return (
     <div className="subject-list-page">
+      <h2 className="subject-list-title">Hãy chọn một chủ đề </h2>{" "}
       {subjects.length > 0 ? (
-        <Row gutter={[20, 20]}>
+        <Row gutter={[20, 20]} justify={"center"} className="subject-list">
           {subjects.map((subject) => (
             <Col sm={5} key={subject._id}>
               <div
@@ -49,15 +50,14 @@ export default function SubjectListPage() {
       ) : (
         <p>Loading Subjects ... </p>
       )}
-
       <Modal
         title={selectedSubject?.name}
         open={selectedSubject}
         onCancel={() => setSelectedSubject(null)}
+        okButtonProps={{ style: { display: "none" } }}
+        cancelButtonProps={{ style: { display: "none" } }}
       >
-        <Typography.Paragraph>
-          Bạn sẽ thực hiện chủ đề này với thử thách
-        </Typography.Paragraph>
+        <Typography.Paragraph>Hãy chọn chế độ chơi :</Typography.Paragraph>
         <Flex gap={20} className="challenge-type-list">
           {challengeTypes.map((challengeType) => (
             <div
