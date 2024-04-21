@@ -11,6 +11,7 @@ import a3 from "./3.jpg";
 import a4 from "./4.jpg";
 import a5 from "./5.jpg";
 import a6 from "./6.jpg";
+import Logo from "../logo";
 
 const failImages = [a0, a1, a2, a3, a4, a5, a6];
 const fakeKeys = [
@@ -125,33 +126,38 @@ const HangingMan = ({
 
   return (
     <div className="hanging-man">
+      <div className="hanging-man-title">
+        <Logo />
+        <div>
+          <Clock
+            time={time}
+            onCountDown={setTime}
+            onStop={() => {
+              console.log("Time over!");
+              setFailCount(6);
+              setTimeout(() => {
+                onFail && onFail();
+              }, 1500);
+            }}
+          />
+        </div>
+      </div>
       <Row>
-        <Col span={18}>
+        <Col span={18} className="hanging-man-top">
           <div className="hanging-man-question">
             <Flex gap={20} align="center" style={{ marginBottom: "10px" }}>
               <div className="hanging-man-question-content">
                 <span>{question}</span>
               </div>
-              <Clock
-                time={time}
-                onCountDown={setTime}
-                onStop={() => {
-                  console.log("Time over!");
-                  setFailCount(6);
-                  setTimeout(() => {
-                    onFail && onFail();
-                  }, 1500);
-                }}
-              />
             </Flex>
             <div className="hanging-man-answer">{currentAnswer}</div>
           </div>
         </Col>
-        <Col span={4}>
+        <Col span={6}>
           <img src={failImages[failCount]} alt="fail" />
         </Col>
         <Col
-          span={22}
+          span={24}
           style={{
             display: "Flex",
             marginTop: "20px",
@@ -171,10 +177,6 @@ const HangingMan = ({
                 </button>
               );
             })}
-          </div>
-          <div className="hanging-man-quote">
-            "Nếu mà khó quá, thì mình bỏ qua. Dù sao câu này học sinh lớp 5 cũng
-            làm được."
           </div>
         </Col>
       </Row>

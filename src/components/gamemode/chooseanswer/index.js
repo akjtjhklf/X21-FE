@@ -3,6 +3,7 @@ import "./style.css";
 
 import { Col, Row, Flex } from "antd";
 import Clock from "../clock";
+import Logo from "../logo";
 
 const gameDuration = 20;
 
@@ -18,16 +19,17 @@ const ChooseAnswer = ({
 }) => {
   const [time, setTime] = useState(gameDuration);
   const [selectedAnswer, setSelectedAnswer] = useState(null); // Track selected answer
-  const [isCorrect, setIsCorrect] = useState(null); // Track correctness
 
   useEffect(() => {
     setTime(gameDuration);
+    setSelectedAnswer(null);
   }, [question, answers]);
 
   const checkAnswer = (userAnswer) => {
+    if (selectedAnswer) {
+      return;
+    }
     setSelectedAnswer(userAnswer);
-    setIsCorrect(userAnswer === correctAnswer);
-
     if (userAnswer !== correctAnswer) {
       setTimeout(() => {
         onFail();
@@ -43,6 +45,19 @@ const ChooseAnswer = ({
     <div className="choose-answer">
       <Row>
         <Col span={24}>
+          <div className="choose-answer-title">
+            <Logo />
+            <div>
+              <Clock
+                time={time}
+                onCountDown={setTime}
+                onStop={() => {
+                  console.log("Time over!");
+                  onFail && onFail();
+                }}
+              />
+            </div>
+          </div>
           <div className="choose-answer-count">
             <Flex
               gap={20}
@@ -55,14 +70,6 @@ const ChooseAnswer = ({
                   Câu {currentQuestionIndex + 1}/{totalQuestion}
                 </span>
               </div>
-              <Clock
-                time={time}
-                onCountDown={setTime}
-                onStop={() => {
-                  console.log("Time over!");
-                  onFail && onFail();
-                }}
-              />
             </Flex>
           </div>
         </Col>
@@ -91,6 +98,8 @@ const ChooseAnswer = ({
                       ? answer === correctAnswer
                         ? "choose-answer-rightanswer"
                         : "choose-answer-falseanswer"
+                      : !!selectedAnswer
+                      ? "choose-answer-answer-button-disable"
                       : "choose-answer-answer-button"
                   }
                 >
