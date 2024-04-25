@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Flex } from "antd";
+import { Row, Col, Flex, message } from "antd";
 import "./style.css";
 import Clock from "../clock";
+import Logo from "../logo";
 
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -11,7 +12,7 @@ function shuffleArray(array) {
   return array;
 }
 
-const gameDuration = 600;
+const gameDuration = 60;
 
 const ReorganizeGame = ({
   question,
@@ -58,18 +59,30 @@ const ReorganizeGame = ({
   const checkAnswer = () => {
     answer.list2.toString();
     if (answer.list2.toString() == correctAnswer.toString()) {
-      console.log("passed");
+      message.success("Đáp án chính xác !");
       onPass();
     } else {
-      console.log("false");
+      message.error("Đáp án không chính xác !");
       onFail();
     }
   };
-
   return (
     <div className="reorganize-game">
       <Row>
         <Col span={24}>
+          <div className="reorganize-game-title">
+            <Logo />
+            <div>
+              <Clock
+                time={time}
+                onCountDown={setTime}
+                onStop={() => {
+                  console.log("Time over!");
+                  onFail && onFail();
+                }}
+              />
+            </div>
+          </div>
           <div className="reorganize-game-count">
             <Flex
               gap={20}
@@ -82,14 +95,6 @@ const ReorganizeGame = ({
                   Câu:{currentQuestionIndex + 1}/{totalQuestion}
                 </span>
               </div>
-              <Clock
-                time={time}
-                onCountDown={setTime}
-                onStop={() => {
-                  console.log("Time over!");
-                  onFail && onFail();
-                }}
-              />
             </Flex>
           </div>
         </Col>
@@ -106,27 +111,31 @@ const ReorganizeGame = ({
           </div>
         </Col>
         <Col span={24}>
-          <div className="reorganize-game-puzzle1">
-            {answer.list1.map((item) => (
-              <span key={item} onClick={() => chooseAnswer(item)}>
-                {item}
-              </span>
-            ))}
+          <div className="reoranize-game-puzzle">
+            <div className="reorganize-game-puzzle1">
+              {answer.list1.map((item) => (
+                <span key={item} onClick={() => chooseAnswer(item)}>
+                  {item}
+                </span>
+              ))}
+            </div>
           </div>
         </Col>
         <Col span={24}>
-          <div className="reorganize-game-puzzle2">
-            {answer.list2.map((item) => (
-              <span key={item} onClick={() => reverseAnswer(item)}>
-                {item}
-              </span>
-            ))}
+          <div className="reoranize-game-puzzle">
+            <div className="reorganize-game-puzzle2">
+              {answer.list2.map((item) => (
+                <span key={item} onClick={() => reverseAnswer(item)}>
+                  {item}
+                </span>
+              ))}
+            </div>
           </div>
           <button
             className="reorganize-button-submit"
             onClick={() => checkAnswer()}
           >
-            Submit
+            Gửi đáp án
           </button>
         </Col>
       </Row>

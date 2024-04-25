@@ -3,6 +3,8 @@ import axios from "axios";
 
 import GameResult from "../gameresult";
 
+import "./style.css";
+
 import ChooseAnswer from "../gamemode/chooseanswer";
 import Reorganize from "../gamemode/reorganize";
 import HangingMan from "../gamemode/hangingman";
@@ -69,7 +71,7 @@ const TakeChallenge = ({ subjectId, challengeType }) => {
   }, [passQuestionCount]);
 
   return (
-    <div>
+    <div className="take-challenge">
       {isGameOver && (
         <GameResult
           setIsGameOver={setIsGameOver}

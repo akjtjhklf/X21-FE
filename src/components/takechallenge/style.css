@@ -1,0 +1,9 @@
+.take-challenge {
+  width: 100%;
+  min-height: 100vh;
+  background-image: url("https://jthemes.net/themes/html/quizo/version-5/assets/images/bg_0.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  overflow: hidden;
+}
