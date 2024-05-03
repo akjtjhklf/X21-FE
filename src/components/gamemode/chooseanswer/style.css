@@ -4,93 +4,90 @@
   box-sizing: border-box;
   font-family: sans-serif;
 }
-
-.main {
-  background-color: #e6e6fa;
-  height: 100vh;
-  padding: 32px;
-}
-.close {
-  float: right;
-  font-size: larger;
-  cursor: pointer;
-}
-.close:hover {
-  color: rgb(188, 24, 24);
-}
-
-/* style cho class main-title */
-.main-title {
-  margin-top: 20px;
-  font-size: 28px;
-  text-decoration: underline;
-  padding-bottom: 12px;
-}
-
-/* style cho class header-title */
-.header-title {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 12px;
-  color: rgb(61, 129, 36);
-  font-weight: 600;
-}
-
-/* style cho các phần tử bên trong header-title */
-.header-title div {
-  font-size: 18px;
-}
-
-/* style cho class question */
-.question {
-  margin-top: 20px;
-  padding: 7px;
-  padding-bottom: 45px;
-}
-
-.question p {
-  font-size: 45px;
-  font-weight: bold;
-}
-
-/* style cho class answer */
-.answer {
-  display: flex;
-  margin-top: 20px;
+.choose-answer {
   width: 80%;
   margin: 0 auto;
-  flex-wrap: wrap;
+  background-color: #807878;
+  border: solid 3px #ccc;
+  border-radius: 15px;
+  margin-top: 40px;
+  background-image: linear-gradient(to right, #decba4, #3e5151);
+}
+.choose-answer-count {
+  width: 100%;
+  height: 100%;
+  color: black;
+  padding: 12px;
+}
+.choose-answer-count-question {
+  border: solid 3px #ccc;
+  border-radius: 15px;
   padding: 18px;
-  justify-content: center;
-  font-size: 24px;
+  background-color: #ffffff;
+  font-size: 14px;
+  font-weight: bolder;
 }
 
-/* style cho các phần tử bên trong answer */
-.answer .answer-1 {
-  width: 45%;
-  padding: 18px;
-  background-color: #c1b6b6;
-  text-align: center;
-  line-height: 50px;
-  margin: 5px;
-  cursor: pointer;
-  color: rgb(29, 25, 64);
-  transition: 300ms;
+.choose-answer-question span {
+  width: 98%;
+  margin: 0 auto;
+  border: solid 3px #ccc;
+  border-radius: 15px;
+  padding: 24px;
+  font-size: 32px;
+  color: #fafafa;
+  background-image: linear-gradient(to right, #434343 0%, black 100%);
 }
-.answer-1:hover {
-  background-color: rgb(19, 100, 158);
-  color: rgb(233, 138, 70);
+.choose-answer-answer {
+  width: 100%;
+  display: flex; /* Use flexbox for layout */
+  flex-wrap: wrap; /* Wrap buttons to multiple lines */
+  justify-content: space-between; /* Distribute buttons evenly */
+  align-items: flex-start; /* Align buttons to the top */
+  gap: 15px; /* Maintain spacing between buttons */
+  padding: 12px;
+  padding-bottom: 50px;
+  padding-top: 50px;
 }
-.a1 {
-  border-top-left-radius: 15px;
+.choose-answer-answer-button {
+  padding: 12px;
+  border-radius: 15px;
+  background-color: white;
+  box-shadow: 3px 3px 3px gray;
+  transition: 500ms;
+  font-size: 25px;
+  flex: 1 1 0;
+  flex-basis: 50%;
+  width: calc(100% - 30px); /* Adjust for padding and gap */
+  height: calc(100% - 30px); /* Adjust for padding and gap */
 }
-.b2 {
-  border-top-right-radius: 15px;
+.choose-answer-answer-button:hover {
+  background-color: rgb(155, 198, 236);
 }
-.c3 {
-  border-bottom-left-radius: 15px;
+.choose-answer-rightanswer {
+  background-color: rgb(41, 215, 41); /* Green for correct answer */
+  color: white;
+  padding: 12px;
+  border-radius: 15px;
+  box-shadow: 3px 3px 3px gray;
+  transition: 500ms;
+  font-size: 25px;
+  flex: 1 1 0;
+  flex-basis: 50%;
+  width: calc(100% - 30px); /* Adjust for padding and gap */
+  height: calc(100% - 30px); /* Adjust for padding and gap */
 }
-.d4 {
-  border-bottom-right-radius: 15px;
+
+.choose-answer-falseanswer {
+  background-color: rgb(202, 31, 31); /* Red for incorrect answer */
+  color: white;
+  padding: 12px;
+  border-radius: 15px;
+  box-shadow: 3px 3px 3px gray;
+  transition: 500ms;
+  font-size: 25px;
+  flex: 1 1 0;
+  flex-basis: 50%;
+  width: calc(100% - 30px); /* Adjust for padding and gap */
+  height: calc(100% - 30px); /* Adjust for padding and gap */
 }
