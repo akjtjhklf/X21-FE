@@ -6,12 +6,14 @@ import TakeSubjects from "./components/takesubject";
 import SubjectListPage from "./pages/subjectlistpage";
 import TakeChallengePage from "./pages/takechallengepage";
 import GameResult from "./components/gameresult";
+import AccountPage from "./pages/accountpage";
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<h1>trang chu</h1>} />
+        <Route path="/info" element={<AccountPage />} />
         <Route path="/login" element={<h1>dang nhap</h1>} />
         <Route path="/register" element={<h1>dang ky</h1>} />
         <Route path="/subjects" element={<SubjectListPage />} />
