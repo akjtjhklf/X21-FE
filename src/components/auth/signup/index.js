@@ -1,16 +1,19 @@
-import React from "react";
-import "./style.css"
+import React, { useState } from "react";
 import {
     Button,
     DatePicker,
     Form,
     Input,
+    InputNumber,
     Select,
+    message,
 } from 'antd';
-import FormItem from "antd/es/form/FormItem";
-const { RangePicker } = DatePicker;
 
-const SignUp = () => {
+import UserService from "../../../services/user.service";
+
+const SignUp = ({ setActiveButton }) => {
+    const [form] = Form.useForm();
+
     const formItemLayout = {
         labelCol: {
             xs: {
@@ -30,127 +33,151 @@ const SignUp = () => {
         },
     };
 
-    const filterOption = (input, option) =>
-        (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
+    const handleSignUp = async (values) => {
+        const { fullName, email, password, gender, dob, confirmPassword, phone } = values;
+        const avatar = `https://api.dicebear.com/7.x/miniavs/svg?seed=${Math.floor(Math.random() * (10000 - 0 + 1)) + 0}`
+        if (password !== confirmPassword) {
+            message.error("Mật khẩu nhập lại không khớp.");
+            return;
+        }
+
+        try {
+            const res = await UserService.register({
+                fullName,
+                phone,
+                email,
+                password,
+                avatar,
+                gender,
+                dob,
+                totalpoint: 0
+            });
+            message.success("Đăng ký thành công.");
+            setActiveButton("signin")
+        } catch (error) {
+            console.log(error);
+            message.error(error.response.data.message)
+        }
+    };
 
     return (
-        <div className="main-component">
-            <div className="signup-component">
+        <div className="col-9">
+            <div className="signup-header animate__animated animate__fadeIn">Đăng ký</div>
+            <Form
+                {...formItemLayout}
+                form={form}
+                variant="filled"
+                className="animate__animated animate__faster animate__zoomIn"
+                onFinish={handleSignUp}
+            >
+                <Form.Item
+                    label="Họ tên"
+                    name="fullName"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Vui lòng nhập họ tên!',
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    label="Email"
+                    name="email"
+                    rules={[
+                        {
+                            required: true,
+                            type: 'email',
+                            message: 'Vui lòng nhập đúng định dạng email!',
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
 
-                <div className="signup-sec row">
-                    <div className="col-3 m-auto">
-                        <div className="d-flex flex-column">
-                        <button>Sign Up</button>
-                        <button>Sign In</button>
-                        </div>
-                    </div>
-                    <div className="col-9">
-                        <div className="signup-header">SignUp</div>
-                        <Form
-                            {...formItemLayout}
-                            variant="filled"
-                            style={{
-                                maxWidth: 600,
-                                marginTop: "40px"
-                            }}
-                        >
-                            <Form.Item
-                                label="Fullname"
-                                name="Fullname"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input!',
-                                    },
-                                ]}
-                            >
-                                <Input />
-                            </Form.Item>
+                <Form.Item
+                    label="Số điện thoại"
+                    name="phone"
+                    rules={[
+                        {
+                            required: true,
+                            pattern: new RegExp(/^[0-9\b]+$/),
+                            message: 'Vui lòng nhập đúng định dạng số!',
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
 
-                            <Form.Item
-                                label="Email"
-                                name="Email"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input!',
-                                    },
-                                ]}
-                            >
-                                <Input
-                                    style={{
-                                        width: '100%',
-                                    }}
-                                />
-                            </Form.Item>
+                <Form.Item
+                    label="Mật khẩu"
+                    name="password"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Vui lòng nhập mật khẩu!',
+                        },
+                    ]}
+                >
+                    <Input.Password />
+                </Form.Item>
+                <Form.Item
+                    label="Nhập lại mật khẩu"
+                    name="confirmPassword"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Vui lòng nhập lại mật khẩu!',
+                        },
+                    ]}
+                >
+                    <Input.Password />
+                </Form.Item>
 
-                            <Form.Item
-                                label="Password"
-                                name="Password"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input!',
-                                    },
-                                ]}
-                            >
-                                <Input.Password />
-                            </Form.Item>
+                <Form.Item
+                    label="Giới tính"
+                    name="gender"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Vui lòng chọn giới tính!',
+                        },
+                    ]}
+                >
+                    <Select
+                        placeholder="Chọn giới tính"
+                        options={[
+                            {
+                                value: "male",
+                                label: 'Nam',
+                            },
+                            {
+                                value: "female",
+                                label: 'Nữ',
+                            }
+                        ]}
+                    />
+                </Form.Item>
+                <Form.Item
+                    label="Ngày sinh"
+                    name="dob"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Vui lòng chọn ngày sinh!',
+                        },
+                    ]}
+                    className="text-start"
+                >
+                    <DatePicker placeholder="Chọn ngày" />
+                </Form.Item>
 
-                            <FormItem
-                                label="Gender"
-                                name="Gender"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input!',
-                                    },
-                                ]}>
-                                <Select
-                                    placeholder="Select Gender"
-                                    optionFilterProp="children"
-                                    filterOption={filterOption}
-                                    className="text-start"
-                                    options={[
-                                        {
-                                            value: 'male',
-                                            label: 'male',
-                                        },
-                                        {
-                                            value: 'female',
-                                            label: 'female',
-                                        }
-                                    ]}
-                                />
-                            </FormItem>
+                <Button htmlType="submit" className="animate__animated animate__fast animate__zoomIn">
+                    Đăng ký
+                </Button>
 
-                            <Form.Item
-                                label="DatePicker"
-                                name="DatePicker"
-                                className="text-start"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input!',
-                                    },
-                                ]}
-                            >
-                                <DatePicker className="w-100" />
-                            </Form.Item>
-                            <Form.Item
-                                wrapperCol={{
-                                    offset: 6,
-                                    span: 16,
-                                }}
-                            >
-                                <Button type="primary" htmlType="submit">
-                                    Submit
-                                </Button>
-                            </Form.Item>
-                        </Form>
-                    </div>
-                </div>
-            </div>
+            </Form>
         </div>
     );
 };
