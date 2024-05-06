@@ -47,7 +47,7 @@ const GameResult = ({
           <button
             type="button"
             className="play-button"
-            onClick={() => navigate("/subjects")}
+            onClick={() => navigate("/")}
           >
             <img
               src="https://assets.ccbp.in/frontend/react-js/match-game-play-again-img.png"

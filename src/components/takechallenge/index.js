@@ -25,7 +25,6 @@ const TakeChallenge = ({ subjectId, challengeType }) => {
         });
         if (response.status == 200) {
           setQuestions(response.data.questions);
-          console.log(response);
         } else {
           console.log("Error fetching");
         }
