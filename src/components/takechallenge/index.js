@@ -17,6 +17,7 @@ const TakeChallenge = ({ subjectId, challengeType }) => {
   const [isGameOver, setIsGameOver] = useState(false);
   const [pointCount, setPointCount] = useState(0);
   const [isAddingPoint, setIsAddingPoint] = useState(false);
+
   useEffect(() => {
     const fetchQuestion = async () => {
       try {

@@ -110,6 +110,7 @@ const HangingMan = ({
         console.log(correctAnswer.toString(), newCurrentAnswer.toString());
         if (correctAnswer === newCurrentAnswer.join("")) {
           onPass();
+          setTime(0);
         }
       } else {
         const newFailCount = failCount + 1;
@@ -118,6 +119,7 @@ const HangingMan = ({
         if (newFailCount >= 6) {
           setTimeout(() => {
             onFail && onFail();
+            setTime(0);
           }, 1500);
         }
       }

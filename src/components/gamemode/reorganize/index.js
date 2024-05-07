@@ -60,10 +60,16 @@ const ReorganizeGame = ({
     answer.list2.toString();
     if (answer.list2.toString() == correctAnswer.toString()) {
       message.success("Đáp án chính xác !");
-      onPass();
+      setTimeout(() => {
+        onPass();
+        setTime(0);
+      }, 2000);
     } else {
       message.error("Đáp án không chính xác !");
-      onFail();
+      setTimeout(() => {
+        setTime(0);
+        onFail();
+      }, 2000);
     }
   };
   return (

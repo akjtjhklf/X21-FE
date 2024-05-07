@@ -17,6 +17,7 @@ import UserService from "../../services/user.service";
 
 const ProfilePage = () => {
   const { user, updateUser } = useAuth();
+  console.log(user.user.totalpoint);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
@@ -26,7 +27,7 @@ const ProfilePage = () => {
       phone: user.user.phone,
       gender: user.user.gender,
       password: user.user.password,
-      dob: moment(user.user.dob), // Sử dụng thư viện moment.js để chuyển đổi ngày sinh
+      dob: moment(user.user.dob),
     });
   };
 
@@ -66,28 +67,28 @@ const ProfilePage = () => {
       dob,
       phone,
     };
-    try {
-      const res = await UserService.changeInfo(user.user._id, newdata);
-      message.success("Cập nhật thông tin thành công.");
-      handleCancel();
-      updateUser();
-    } catch (error) {
-      console.log(error);
-      message.error(error.response.data.message);
-    }
+    // try {
+    //   const res = await UserService.changeInfo(user.user._id, newdata);
+    //   message.success("Cập nhật thông tin thành công.");
+    //   handleCancel();
+    //   updateUser();
+    // } catch (error) {
+    //   console.log(error);
+    //   message.error(error.response.data.message);
+    // }
   };
 
   return (
     <div className="row profile-main">
       <div className="profile-title">
-        <h4>Hồ sơ của bạn</h4>
+        <h2>Thông tin cá nhân</h2>
       </div>
       <div className="col-3">
         <img
           className="mb-4 text-center"
           src={String.fromCharCode.apply(null, user.user.avatar.data)}
         ></img>
-        <h2 className="mt-5 info">{user.user.fullName}</h2>
+        {/* <h2 className="mt-5 info">{user.user.fullName}</h2> */}
       </div>
       <div className="col-9">
         <Divider orientation="center" plain>

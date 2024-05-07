@@ -32,18 +32,11 @@ const GameResult = ({
             className="trophy-image"
             alt="trophy"
           />
-          <p className="main-heading">YOUR SCORE</p>
-          <p>
-            Bạn đã vượt qua{" "}
-            <span style={{ color: "white" }}>{passQuestionCount}</span> trên
-            tổng số <span style={{ color: "white" }}>{totalQuestion}</span> câu
+          <p className="main-heading">{pointCount} điểm</p>
+          <p className="main-heading-1">
+            Bạn đã vượt qua {passQuestionCount} trên tổng số {totalQuestion} câu
             hỏi !
           </p>
-          <p className="your-score">
-            Và giành được : <span style={{ color: "white" }}>{pointCount}</span>{" "}
-            điểm
-          </p>
-
           <button
             type="button"
             className="play-button"
@@ -54,7 +47,7 @@ const GameResult = ({
               className="restart"
               alt="reset"
             />
-            PLAY AGAIN
+            CHƠI LẠI ?
           </button>
         </div>
       </Modal>

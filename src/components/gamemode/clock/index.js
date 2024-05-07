@@ -1,19 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
 const Clock = ({ time, onCountDown, onStop }) => {
-  // const [time, setTime] = useState(initialSecs);
-
-  // useEffect(() => {
-  //   if (time > 0) {
-  //     setTimeout(() => {
-  //       const newTime = time - 1;
-  //       setTime(newTime);
-  //     }, 1000);
-  //   } else {
-  //     onStop();
-  //     setTime(initialSecs);
-  //   }
-  // }, [time]);
+  const [countTime, setCountTime] = useState(null);
 
   useEffect(() => {
     let timer = null;
