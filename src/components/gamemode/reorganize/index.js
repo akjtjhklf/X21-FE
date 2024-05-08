@@ -12,7 +12,7 @@ function shuffleArray(array) {
   return array;
 }
 
-const gameDuration = 6000;
+const gameDuration = 60;
 
 const ReorganizeGame = ({
   question,

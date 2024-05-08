@@ -39,8 +39,8 @@ const SignIn = () => {
     const { email, password } = values;
     const url =
       typeOfAccount === "user"
-        ? "http://localhost:3001/users/login"
-        : "http://localhost:3001/admins/login";
+        ? "https://x21-be.onrender.com/users/login"
+        : "https://x21-be.onrender.com/admins/login";
 
     try {
       const res = await axios.post(url, { email, password });
