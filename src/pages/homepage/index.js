@@ -35,14 +35,13 @@ const HomePage = ({ user }) => {
             <div className="hompage-main-start">
               <PlayCircleOutlined
                 className="homepage-main-start-button"
-                onClick={() => {
-                  if (!user.token) {
-                    message.warning("Bạn cần đăng nhập trước.");
-                    navigate("/auth");
-                  } else {
-                    handleStart();
-                  }
-                }}
+                onClick={() =>
+                  // if (!user.token) {
+                  //   message.warning("Bạn cần đăng nhập trước.");
+                  //   navigate("/auth");
+                  // } else {
+                  handleStart()
+                }
               />
               <p>Click to start</p>
             </div>
