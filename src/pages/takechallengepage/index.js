@@ -2,6 +2,8 @@ import React from "react";
 import TakeChallenge from "../../components/takechallenge";
 import { useSearchParams } from "react-router-dom";
 
+import "./style.css";
+
 export default function TakeChallengePage() {
   const [searchParams, setSearchParams] = useSearchParams();
 

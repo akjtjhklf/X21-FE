@@ -156,7 +156,7 @@ const HangingMan = ({
           </div>
         </Col>
         <Col span={6}>
-          <img src={failImages[failCount]} alt="fail" />
+          <img className="fail-image" src={failImages[failCount]} alt="fail" />
         </Col>
         <Col
           span={24}
@@ -186,6 +186,3 @@ const HangingMan = ({
   );
 };
 export default HangingMan;
-
-//Có 1 lỗi :
-// Khi game over, chưa reset được phần trả lời về lại dạng *
