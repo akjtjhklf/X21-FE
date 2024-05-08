@@ -37,7 +37,7 @@ const ManageQuestion = () => {
 
   const createQuestion = async (payload) => {
     try {
-      await axios.post("http://localhost:3001/qnas/admin", payload);
+      await axios.post("https://x21-be.onrender.com/qnas/admin", payload);
       message.success("Câu hỏi mới đã được tạo thành công!");
     } catch (error) {
       console.log(error);
@@ -47,7 +47,7 @@ const ManageQuestion = () => {
 
   const updateQuestion = async (id, payload) => {
     try {
-      await axios.put(`http://localhost:3001/qnas/${id}`, payload);
+      await axios.put(`https://x21-be.onrender.com/qnas/${id}`, payload);
       message.success("Câu hỏi đã được cập nhật thành công!");
     } catch (error) {
       console.log(error);
@@ -84,7 +84,9 @@ const ManageQuestion = () => {
         await createQuestion(payload);
       }
       // Refresh the list of questions
-      const response = await axios.get("http://localhost:3001/qnas/admin");
+      const response = await axios.get(
+        "https://x21-be.onrender.com/qnas/admin"
+      );
       setQnas(response.data.questions);
     } catch (error) {
       console.log(error);
@@ -106,7 +108,9 @@ const ManageQuestion = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/qnas/admin");
+        const response = await axios.get(
+          "https://x21-be.onrender.com/qnas/admin"
+        );
         const subjectresponse = await SubjectsService.getAll();
         setSubjects(subjectresponse.data);
         setQnas(response.data.questions);
@@ -120,10 +124,12 @@ const ManageQuestion = () => {
   }, [qnas, subjects]);
   const deleteQuestion = async (id) => {
     try {
-      await axios.delete(`http://localhost:3001/qnas/${id}`);
+      await axios.delete(`https://x21-be.onrender.com/qnas/${id}`);
       message.success("Câu hỏi đã được xóa thành công!");
       // Refresh the list of questions
-      const response = await axios.get("http://localhost:3001/qnas/admin");
+      const response = await axios.get(
+        "https://x21-be.onrender.com/qnas/admin"
+      );
       setQnas(response.data.questions);
     } catch (error) {
       console.log(error);

@@ -11,7 +11,9 @@ const Ranking = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/users/rank");
+        const response = await axios.get(
+          "https://x21-be.onrender.com/users/rank"
+        );
         setUsers(response.data);
       } catch (error) {
         console.log(error);

@@ -21,7 +21,7 @@ const TakeChallenge = ({ subjectId, challengeType }) => {
   useEffect(() => {
     const fetchQuestion = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/qnas/", {
+        const response = await axios.get("https://x21-be.onrender.com/qnas/", {
           params: { subjectId: subjectId, challengeType: challengeType },
         });
         if (response.status == 200) {
