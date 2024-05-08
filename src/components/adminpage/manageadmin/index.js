@@ -115,14 +115,24 @@ const ManageAdmin = () => {
       </Modal>
       {admins.length > 0 ? (
         <div className="row questions-list">
-          {admins.map((admin) => (
+          {admins.map((admin,index) => (
             <div
               key={admin._id}
-              className="question-item col-3"
+              className="question-item admin-item col-3"
               onClick={() => setSelectedAdmin(admin)}
             >
-              <p className="question-item-content">{admin.fullName}</p>
-              <p className="question-item-content">{admin.email}</p>
+              <div className="question-item-answer">
+                <span className="title me-2">STT:</span>
+                <span>{index+1}</span>
+              </div>
+              <div className="question-item-answer">
+                <span className="title me-2">Họ và tên:</span>
+                <span>{admin.fullName}</span>
+              </div>
+              <div className="question-item-answer">
+                <span className="title me-2">Email:</span>
+                <span>{admin.email}</span>
+              </div>
               <Dropdown
                 menu={{
                   items: [

@@ -226,43 +226,49 @@ const ManageQuestion = () => {
         <div className="row questions-list">
           {qnas.map((qna) => (
             <div key={qna._id} className="question-item col-3">
-              <p className="question-item-content">
-                Câu hỏi:
-                <br />
-                {qna.question}
-              </p>
-              <p className="question-item-content">
-                Cách chơi: {qna.challengeType}
-              </p>
-              <p className="question-item-answer">Đáp án: {qna.rightAnswer}</p>
-              <Dropdown
-                menu={{
-                  items: [
-                    {
-                      key: "1",
-                      label: (
-                        <EditOutlined
-                          className="dropdown-item"
-                          onClick={() => showModal(qna)}
-                        />
-                      ),
-                    },
-                    {
-                      key: "2",
-                      label: (
-                        <DeleteOutlined
-                          className="dropdown-item"
-                          onClick={() => deleteQuestion(qna._id)}
-                        />
-                      ),
-                    },
-                  ],
-                }}
-              >
-                <Button className="dropdown-editing">
-                  <EllipsisOutlined />
-                </Button>
-              </Dropdown>
+              <div className="question-item-header">
+                <span className="title me-2">Câu hỏi:</span>
+                <span>{qna.question}</span>
+              </div>
+
+              <div className="question-item-body">
+                <span className="title me-2">Cách chơi:</span>
+                <span>{qna.challengeType}</span>
+              </div>
+              <div className="question-item-answer">
+                <span className="title me-2">Đáp án:</span>
+                <span>{qna.rightAnswer}</span>
+              </div>
+              <div className="question-item-actions">
+                <Dropdown
+                  menu={{
+                    items: [
+                      {
+                        key: "1",
+                        label: (
+                          <EditOutlined
+                            className="dropdown-item"
+                            onClick={() => showModal(qna)}
+                          />
+                        ),
+                      },
+                      {
+                        key: "2",
+                        label: (
+                          <DeleteOutlined
+                            className="dropdown-item"
+                            onClick={() => deleteQuestion(qna._id)}
+                          />
+                        ),
+                      },
+                    ],
+                  }}
+                >
+                  <Button className="dropdown-editing">
+                    <EllipsisOutlined />
+                  </Button>
+                </Dropdown>
+              </div>
             </div>
           ))}
         </div>

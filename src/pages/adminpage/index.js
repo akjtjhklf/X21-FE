@@ -26,7 +26,7 @@ const AdminPage = () => {
 
     return (
         <div className="row adminpage-main">
-            <ChooseManagement setCurrentTab={setCurrentTab} />
+            <ChooseManagement setCurrentTab={setCurrentTab} currentTab={currentTab} />
             {renderTab()}
         </div>
     )

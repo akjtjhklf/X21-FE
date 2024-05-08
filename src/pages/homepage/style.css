@@ -2,7 +2,7 @@
   background-image: url("https://png.pngtree.com/background/20210709/original/pngtree-autumn-taste-games-cartoon-picture-image_958468.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  max-width: 100%;
+  width: 100%;
   height: fit-content;
   min-height: 100vh;
   border-radius: 4px;
