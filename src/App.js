@@ -15,10 +15,10 @@ import GameResult from "./components/gameresult";
 import HomePage from "./pages/homepage";
 import AuthPage from "./pages/auth";
 import TakeChallengePage from "./pages/takechallengepage";
-import SubjectListPage from "./pages/subjectlistpage";
 import ProfilePage from "./pages/profilepage";
 // import AccountPage from "./pages/accountpage";
 import AdminPage from "./pages/adminpage";
+import ChooseSubject from "./components/homepage/chooseSubject.js";
 
 function App() {
   const { user, loading } = useAuth();
@@ -32,7 +32,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage user={user} />} />
-        <Route path="/subjects" element={<SubjectListPage />} />
+        <Route path="/subjects" element={<ChooseSubject />} />
         <Route path="/auth" element={<AuthPage />}></Route>
         <Route path="/take-challenge" element={<TakeChallengePage />} />
         <Route path="/profile" element={<ProfilePage />}></Route>

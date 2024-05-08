@@ -5,6 +5,7 @@ import { Col, Flex, Modal, Row, Typography } from "antd";
 import { RollbackOutlined, SyncOutlined } from "@ant-design/icons";
 import SubjectsService from "../../../services/subject.service";
 import { useNavigate } from "react-router-dom";
+import api from "../../../services/api";
 
 const ChooseSubject = ({ setIsStart }) => {
   const [subjects, setSubjects] = useState([]);
@@ -15,17 +16,14 @@ const ChooseSubject = ({ setIsStart }) => {
     { value: "arrange", label: "Sắp xếp câu" },
   ]);
   const navigate = useNavigate();
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await SubjectsService.getAll();
-        setSubjects(response.data);
-      } catch (error) {
-        console.log(error);
-        message.error(error.response.data.message);
-      }
-    };
 
+  const fetchData = async () => {
+    const response = await api.subjects.invoke();
+    setSubjects(response.data.data);
+  };
+
+  useEffect(() => {
+    // lay danh sach subject
     fetchData();
   }, []);
   const play = (challengeType) => {
@@ -46,7 +44,7 @@ const ChooseSubject = ({ setIsStart }) => {
           onClick={() => handleBackWard()}
         />
       </div>
-      {subjects.length > 0 ? (
+      {subjects?.length > 0 ? (
         <div className="d-flex flex-row flex-wrap subject-main">
           {subjects.map((subject) => (
             <Button
