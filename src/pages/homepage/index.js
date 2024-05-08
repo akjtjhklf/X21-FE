@@ -11,10 +11,11 @@ import "./style.css";
 const HomePage = ({ user }) => {
   const [isStart, setIsStart] = useState(false);
   const navigate = useNavigate();
+  const token = localStorage.getItem("token")
 
   useEffect(() => {
     // Check if user token exists on component mount
-    if (!user.token) {
+    if (!token) {
       navigate("/auth"); // Redirect to AuthPage if no token
     }
   }, [user.token, navigate]);
